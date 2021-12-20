@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BarangController;
 use App\Http\Controllers\HistoryController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -24,16 +25,26 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/pesan/{id}', [PesanController::class, 'index']);
-Route::post('/pesan/{id}', [PesanController::class, 'pesan']);
-Route::get('/check-out', [PesanController::class, 'check_out']);
-Route::delete('/check-out/{id}', [PesanController::class, 'delete']);
+Route::group(['middleware' => ['auth', 'ceklevel:penjual']], function () {
+    Route::get('/daftar-barang', [BarangController::class, 'index']);
+    Route::get('/daftar-barang/{id}', [BarangController::class, 'barang']);
+    Route::get('/daftar-pesanan', [BarangController::class, 'daftar_pesanan']);
+});
 
-Route::get('/konfirmasi-check-out', [PesanController::class, 'konfirmasi']);
+Route::group(['middleware' => ['auth', 'ceklevel:user']], function () {
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/pesan/{id}', [PesanController::class, 'index']);
+    Route::post('/pesan/{id}', [PesanController::class, 'pesan']);
+    Route::get('/check-out', [PesanController::class, 'check_out']);
+    Route::delete('/check-out/{id}', [PesanController::class, 'delete']);
 
-Route::get('/profile', [ProfileController::class, 'index']);
-Route::post('/profile', [ProfileController::class, 'update']);
+    Route::get('/konfirmasi-check-out', [PesanController::class, 'konfirmasi']);
 
-Route::get('/history', [HistoryController::class, 'index']);
-Route::get('history/{id}', [HistoryController::class, 'detail']);
+    Route::get('/history', [HistoryController::class, 'index']);
+    Route::get('history/{id}', [HistoryController::class, 'detail']);
+});
+
+Route::group(['middleware' => ['auth', 'ceklevel:penjual,user']], function () {
+    Route::get('/profile', [ProfileController::class, 'index']);
+    Route::post('/profile', [ProfileController::class, 'update']);
+});

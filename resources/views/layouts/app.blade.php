@@ -55,6 +55,7 @@
                                 </li>
                             @endif
                         @else
+                        @if (auth()->user()->level == "user")
                         <li class="nav-item">
                             <?php
                             $pesanan_utama = \App\Models\Pesanan::where('user_id', Auth::user()->id)->where('status', 0)->first();
@@ -66,10 +67,18 @@
                             <a class="nav-link" href="{{ url('check-out') }}">
                                 <i class="fa fa-shopping-cart"></i> 
                                 @if(!empty($notif))
-                                <span class="badge bg-danger"></span>
+                                <span class="badge bg-danger">{{ $notif }}</span>
                                 @endif
                             </a>
                         </li>
+                        @endif
+                        @if (auth()->user()->level == "penjual")
+                        <li class="nav-item">                            
+                            <a class="nav-link" href="{{ url('daftar-pesanan') }}">
+                                Pesanan
+                            </a>
+                        </li>
+                        @endif
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
@@ -80,9 +89,11 @@
                                         Profile
                                     </a>
 
+                                    @if (auth()->user()->level == "user")
                                     <a class="dropdown-item" href="{{ url('history') }}">
                                         Riwayat Pemesanan
                                     </a>
+                                    @endif
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
