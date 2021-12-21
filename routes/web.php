@@ -29,6 +29,9 @@ Route::group(['middleware' => ['auth', 'ceklevel:penjual']], function () {
     Route::get('/daftar-barang', [BarangController::class, 'index']);
     Route::get('/daftar-barang/{id}', [BarangController::class, 'barang']);
     Route::get('/daftar-pesanan', [BarangController::class, 'daftar_pesanan']);
+    Route::post('/update-daftar-pesanan/{id}', [BarangController::class, 'daftar_pesanan_update']);
+    Route::post('/update-barang/{id}', [BarangController::class, 'update']);
+    Route::get('/tambah-barang', [BarangController::class, 'add']);
 });
 
 Route::group(['middleware' => ['auth', 'ceklevel:user']], function () {

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Barang;
 use App\Models\Pesanan;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class BarangController extends Controller
 {
@@ -31,9 +32,26 @@ class BarangController extends Controller
         return view('barang.daftar_pesanan', compact('daftar_pesanans'));
     }
 
-    public function daftar_pesanan_update()
+    public function daftar_pesanan_update(Request $request, $id)
     {
-        $daftar_pesanans = Pesanan::paginate(20);
-        return view('barang.daftar_pesanan', compact('daftar_pesanans'));
+        $daftar_pesanan = Pesanan::findorfail($id);
+        $daftar_pesanan->update($request->all());
+
+        Alert::success('Status Pesanan Sukses Diupdate', 'Success');
+        return redirect('daftar-pesanan');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $update_barang = Barang::findorfail($id);
+        $update_barang->update($request->all());
+
+        Alert::success('Barang Sukses Diupdate', 'Success');
+        return redirect('daftar-barang');
+    }
+
+    public function add()
+    {
+        return view('barang.add');
     }
 }

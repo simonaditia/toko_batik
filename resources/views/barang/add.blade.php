@@ -12,7 +12,7 @@
                     <li class="breadcrumb-item">
                         <a href="{{ url('daftar-barang') }}">Home</a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">{{ $barang->nama_barang }}</li>
+                    <li class="breadcrumb-item active" aria-current="page">Tambah Barang</li>
                 </ol>
             </nav>
         </div>
@@ -23,43 +23,50 @@
                 </div> --}}
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-6">
-                            <img src="{{ url('uploads') }}//{{ $barang->gambar }}" width="100%" class="rounded mx-auto d-block" alt="{{ $barang->gambar }}">
-                        </div>
-                        <div class="col-md-6 mt-5">
+                        {{-- <div class="col-md-6">
+                            <img src="" width="100%" class="rounded mx-auto d-block" alt="">
+                        </div> --}}
+                        <div class="col-12 mt-5">
                             {{-- <h2>{{ $barang->nama_barang }}</h2> --}}
                             <table class="table">
                                 <tbody>
-                                    <form action="{{ url('update-barang') }}/{{ $barang->id }}" method="POST">
+                                    <form action="" method="POST">
                                         @csrf
                                         <tr>
                                             <td>Nama Barang</td>
                                             <td>:</td>
                                             <td>
-                                                <input type="text" name="nama_barang" class="form-control" value="{{ $barang->nama_barang }}" required>
+                                                <input type="text" name="nama_barang" class="form-control" value="" required>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Harga</td>
                                             <td>:</td>
                                             <td>
-                                                <input type="number" name="harga" class="form-control" value="{{ $barang->harga }}" required>
+                                                <input type="number" name="harga" class="form-control" value="" required>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Stok</td>
                                             <td>:</td>
                                             <td>
-                                                <input type="text" name="stok" class="form-control" value="{{ $barang->stok }}" required>
+                                                <input type="number" name="stok" class="form-control" value="" required>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Keterangan</td>
                                             <td>:</td>
                                             <td>
-                                                <input type="text" name="keterangan" class="form-control" value="{{ $barang->keterangan }}" required>
+                                                <input type="text" name="keterangan" class="form-control" value="" required>
                                             </td>
-                                        </tr>                                    
+                                        </tr>
+                                        <tr>
+                                            <td>Gambar</td>
+                                            <td>:</td>
+                                            <td>
+                                                <input type="file" name="gambar" class="form-control" value="" required>
+                                            </td>
+                                        </tr>
                                         <tr>
                                             <td></td>
                                             <td></td>

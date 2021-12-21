@@ -3,8 +3,11 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-12 mb-5">
+        <div class="col-md-12 mb-2">
             <img src="{{ url('images/logo.png') }}" width="700" alt="Logo Atria Batik" class="rounded mx-auto d-block">
+        </div>
+        <div class="col-md4 mb-4">
+            <a href="{{ url('tambah-barang') }}" class="btn btn-info"><i class="fa fa-plus"></i> Tambah</a>
         </div>
         @foreach ($barangs as $barang)
             <div class="col-md-4">
